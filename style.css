@@ -25,7 +25,7 @@ body
 .copy_right_footer {
     font-size: 19px;
     background-color: grey;
-    position: fixed;
+    position: sticky;
     bottom: 0%;
     width: 100%;
     line-height: 2;
@@ -35,4 +35,11 @@ body
 .modal-body {
     font-size: 25px;
     text-align: left;
+}
+
+canvas {
+    border: solid grey 5px;
+    border-radius: 25px;
+    box-shadow: 5px 5px 5px rgb(241, 178, 61);
+    margin-top: 30px;
 }
