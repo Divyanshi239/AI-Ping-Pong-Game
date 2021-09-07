@@ -24,10 +24,10 @@ function setup() {
 
   video = createCapture(VIDEO);
   video.size(700, 600);
-  video.hide()
+  video.parent("canvas");
 
   poseNet = ml5.poseNet(video, modelLoaded);
-  poseNet.on('pose', gotposes);
+  //poseNet.on('pose', gotposes);
 }
 
 function modelLoaded()
