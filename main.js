@@ -24,7 +24,7 @@ function setup() {
 
   video = createCapture(VIDEO);
   video.size(700, 600);
-  video.parent("canvas");
+  video.hide();
 
   poseNet = ml5.poseNet(video, modelLoaded);
   //poseNet.on('pose', gotposes);
@@ -38,9 +38,9 @@ function modelLoaded()
 
 function draw() {
 
-  image(video, 0, 0, 700, 600)
-
   background(0);
+
+  image(video, 0, 0, 700, 600);
 
   fill("black");
   stroke("black");
