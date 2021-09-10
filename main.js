@@ -14,6 +14,8 @@ rightWristX = "";
 rightWristY = "";
 rightWristScore = "";
 
+GameStatus = "";
+
 //ball x and y and speedx speed y and radius
 var ball = {
   x: 350 / 2,
@@ -35,10 +37,8 @@ function setup() {
   poseNet.on('pose', gotposes);
 }
 
-function gotposes(results)
-{
-  if(results.length > 0)
-  {
+function gotposes(results) {
+  if (results.length > 0) {
     console.log(results);
     rightWristX = results[0].pose.rightWrist.x;
     rightWristY = results[0].pose.rightWrist.y;
@@ -50,8 +50,7 @@ function gotposes(results)
   }
 }
 
-function modelLoaded()
-{
+function modelLoaded() {
   console.log("Model Is Initialized!");
 }
 
@@ -62,51 +61,54 @@ function draw() {
 
   image(video, 0, 0, 700, 600);
 
-  fill("black");
-  stroke("black");
-  rect(680, 0, 20, 700);
+  if (GameStatus == "start") {
+    fill("black");
+    stroke("black");
+    rect(680, 0, 20, 700);
 
-  fill("black");
-  stroke("black");
-  rect(0, 0, 20, 700);
+    fill("black");
+    stroke("black");
+    rect(0, 0, 20, 700);
 
-  //funtion paddleInCanvas call 
-  paddleInCanvas();
+    //funtion paddleInCanvas call 
+    paddleInCanvas();
 
-  //left paddle
-  fill(250, 0, 0);
-  stroke(0, 0, 250);
-  strokeWeight(0.5);
-  paddle1Y = mouseY;
-  rect(paddle1X, paddle1Y, paddle1, paddle1Height, 100);
+    //left paddle
+    fill(250, 0, 0);
+    stroke(0, 0, 250);
+    strokeWeight(0.5);
+    paddle1Y = mouseY;
+    rect(paddle1X, paddle1Y, paddle1, paddle1Height, 100);
 
 
-  //pc computer paddle
-  fill("#FFA500");
-  stroke("#FFA500");
-  var paddle2y = ball.y - paddle2Height / 2; rect(paddle2Y, paddle2y, paddle2, paddle2Height, 100);
+    //pc computer paddle
+    fill("#FFA500");
+    stroke("#FFA500");
+    var paddle2y = ball.y - paddle2Height / 2; rect(paddle2Y, paddle2y, paddle2, paddle2Height, 100);
 
-  //function midline call
-  midline();
+    //function midline call
+    midline();
 
-  //funtion drawScore call 
-  drawScore();
+    //funtion drawScore call 
+    drawScore();
 
-  //function models call  
-  models();
+    //function models call  
+    models();
 
-  //function move call which in very important
-  move();
+    //function move call which in very important
+    move();
 
-  if(rightWristScore > 0.2)
-  {
-    r = random(255);
-    g = random(255);
-    b = random(255);
-    fill(r, b, g);
-    stroke(r, b. g);
-    circle(rightWristX, rightWristY, 20);
+    if (rightWristScore > 0.2) {
+      r = random(255);
+      g = random(255);
+      b = random(255);
+      fill(r, b, g);
+      stroke(r, b.g);
+      circle(rightWristX, rightWristY, 20);
+    }
   }
+
+
 }
 
 
@@ -203,4 +205,9 @@ function paddleInCanvas() {
   if (mouseY < 0) {
     mouseY = 0;
   }
+}
+
+function startGame() {
+  GameStatus = "start";
+  document.getElementById("status").innerHTML = "Game Is Loaded";
 }
