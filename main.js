@@ -25,6 +25,12 @@ var ball = {
   dy: 3
 }
 
+function preload()
+{
+  ball_touch = loadSound("ball_touch_paddel.wav");
+  ball_miss = loadSound("missed.wav");
+}
+
 function setup() {
   canvas = createCanvas(700, 600);
   canvas.parent("canvas");
@@ -42,7 +48,7 @@ function gotposes(results) {
     console.log(results);
     rightWristX = results[0].pose.rightWrist.x;
     rightWristY = results[0].pose.rightWrist.y;
-    rightWristScore = results[0].pose.score;
+    rightWristScore = results[0].pose.keypoints[10].score;
     console.log("Right Wrist X = " + rightWristX);
     console.log("Right Wrist Y = " + rightWristY);
     console.log("Score = " + rightWristScore);
@@ -77,7 +83,7 @@ function draw() {
     fill(250, 0, 0);
     stroke(0, 0, 250);
     strokeWeight(0.5);
-    paddle1Y = mouseY;
+    paddle1Y = rightWristY;
     rect(paddle1X, paddle1Y, paddle1, paddle1Height, 100);
 
 
@@ -102,7 +108,7 @@ function draw() {
       r = random(255);
       g = random(255);
       b = random(255);
-      fill(r, b, g);
+      fill("red");
       stroke(r, b.g);
       circle(rightWristX, rightWristY, 20);
     }
